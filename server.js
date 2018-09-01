@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const errorHandlers = require('./handlers/errorHandlers');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -42,12 +43,11 @@ app.get('/about', (req, res) => {
   });
 });
 
-app.get('/bad', (req, res) => {
-  res.json({
-    err: 'Whoops',
-    message: 'Something went horribly wrong!',
-  });
-});
+//error handling
+//404
+app.use(errorHandlers.notFound);
+//display whatever error occured
+app.use(errorHandlers.devErrors);
 
 app.listen(port, () => {
   console.log('server is listening on port: ' + port);
