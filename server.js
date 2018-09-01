@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
+const port = process.env.PORT || 3000;
 //set view engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/views'));
@@ -48,6 +49,6 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('server is listening on port: 3000');
+app.listen(port, () => {
+  console.log('server is listening on port: ' + port);
 });
